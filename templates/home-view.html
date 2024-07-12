@@ -3,7 +3,9 @@
 <p>{{content}}</p>
 <ul>
   {% for x in object_list %} {%if x.title%}
-  <li>{{x.title}} - {{x.content}}</li>
+  <li>
+    <a href="/articles/{{x.id}}">{{x.title}} - {{x.content}}</a>
+  </li>
   {% endif %} {% endfor %}
 </ul>
 {% endblock content %}
