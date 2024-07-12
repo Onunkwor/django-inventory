@@ -1,5 +1,9 @@
 {% extends "base.html" %} {% block content %}
 <h1>{{title}}</h1>
 <p>{{content}}</p>
-
+<ul>
+  {% for x in object_list %} {%if x.title%}
+  <li>{{x.title}} - {{x.content}}</li>
+  {% endif %} {% endfor %}
+</ul>
 {% endblock content %}
