@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %} {% if object_list %}
+<ul>
+  {% for article in object_list %}
+  <li>{{ article.title }} - {{article.content}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No articles found.</p>
+{% endif %} {% endblock content %}
