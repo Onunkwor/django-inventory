@@ -1,0 +1,97 @@
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# If you are using Django migrations
+*.mo
+*.pot
+
+# If your static files are being collected to a staticfiles directory
+/static/
+
+# Coverage reports
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# If you use Docker
+*.env
+docker-compose*.yml
+Dockerfile
+
+# PyCharm specific
+.idea/
+
+# VS Code specific
+.vscode/
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+
+# JetBrains specific
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# dotenv
+.env
+
+# node_modules for front-end assets
+node_modules/
+npm-debug.log
+
+# Test coverage
+.coverage
+.tox/
+.nox/
+.cache/
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage/
+
+# System files
+*.bak
+*.swp
+*~
+*.swo

@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block content %} {% if not object %}
+<form
+  action="."
+  method="post"
+  style="display: flex; flex-direction: column; width: 400px; gap: 20px"
+>
+  {% csrf_token %}
+  <input type="text" name="title" placeholder="Article title" />
+  <textarea name="content" placeholder="content"></textarea>
+  <input type="submit" value="Create article" />
+</form>
+{% endif %} {% if created %} {% if object %}
+<p>Your article was created</p>
+<a href="/articles/{{ object.id }}">{{ object.title }}</a>
+{% else %}
+<p>Something went wrong..</p>
+{% endif %} {% endif %} {% endblock content %}

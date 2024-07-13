@@ -14,7 +14,7 @@ def article_detail_view(request, id=None):
 
 
 def article_search_view(request):
-    print(request.user)
+    # print(request.user)
     query_dict = dict(request.GET)
     query = query_dict.get('q')
     object_list = None
@@ -42,3 +42,21 @@ def article_search_view(request):
         'object_list': object_list,
     }
     return render(request, 'articles/search.html', context=context)
+
+
+# @csrf_exempt
+def article_create_view(request):
+    context = {}
+    if request.method == 'POST':
+        title, content = request.POST.get('title'), request.POST.get('content')
+        object = Article.objects.create(title=title, content=content)
+        if title and object:
+            context['title'] = title
+            context['content'] = content
+            context['created'] = True
+            context['object'] = object
+        else:
+            context['created'] = False
+    else:
+        context['created'] = False
+    return render(request, 'articles/create.html', context=context)
