@@ -50,18 +50,18 @@ def article_search_view(request):
 @login_required
 def article_create_view(request):
     form = ArticleForm(request.POST or None)
-    context = {
-        'form': form,
-    }
-    print(dir(form))
+    context = {}
+    # print(dir(form))
     if form.is_valid():
-        title, content = form.cleaned_data.get(
-            'title'), form.cleaned_data.get('content')
-        object = Article.objects.create(title=title, content=content)
+        # title, content = form.cleaned_data.get(
+        #     'title'), form.cleaned_data.get('content')
+        # object = Article.objects.create(title=title, content=content)
+        object = form.save()
         if object:
             context['created'] = True
             context['object'] = object
         else:
             context['created'] = False
-
+            form = ArticleForm()
+    context['form'] = form
     return render(request, 'articles/create.html', context=context)
