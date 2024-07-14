@@ -1,12 +1,13 @@
 {% extends "base.html" %} {% block content %} {% if not object %}
+<!-- prettier-ignore -->
 <form
   action="."
   method="post"
-  style="display: flex; flex-direction: column; width: 400px; gap: 20px"
+  style="display: flex; flex-direction: column; width: 400px;"
 >
   {% csrf_token %}
-  <input type="text" name="title" placeholder="Article title" />
-  <textarea name="content" placeholder="content"></textarea>
+{{ form.as_p }}
+   
   <input type="submit" value="Create article" />
 </form>
 {% endif %} {% if created %} {% if object %}
