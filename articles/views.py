@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from articles.models import Article
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import ArticleForm
 # Create your views here.
 
 
-def article_detail_view(request, id=None):
+def article_detail_view(request, slug=None):
     object = None
-    if id is not None:
-        object = Article.objects.get(id=id)
+    if slug is not None:
+        try:
+            object = Article.objects.get(slug=slug)
+        except Article.DoesNotExist:
+            return render(request, 'articles/404.html')
     context = {
         'object': object
     }
@@ -18,20 +22,22 @@ def article_detail_view(request, id=None):
 def article_search_view(request):
     # print(request.user)
     query_dict = dict(request.GET)
-    query = query_dict.get('q')
+    query = query_dict.get('slug')
     object_list = None
 
     if query and len(query) > 0:
         try:
             # Attempt to convert the query to an integer
-            query_id = int(query[0])
+            query_id = str(query[0])
             # If successful, try to find an article by ID
-            object_list = [Article.objects.get(id=query_id)]
+            lookups = Q(id=query_id)
+            object_list = list(Article.objects.get(lookups))
         except ValueError:
             # If conversion fails, assume the query is a string
             query_string = query[0]
             # Search for articles containing the query string in their title
-            object_list = Article.objects.filter(title__icontains=query_string)
+
+            object_list = Article.objects.search(query=query_string)
         except Article.DoesNotExist:
             # Handle the case where no article with the given ID is found
             object_list = []
