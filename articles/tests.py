@@ -7,7 +7,8 @@ from articles.utils import slugify_instance_title
 
 class ArticleTestCase(TestCase):
     def setUp(self):
-        for i in range(0, 5):
+        self.number_of_articles = 5
+        for i in range(0, self.number_of_articles):
             Article.objects.create(title="Test function",
                                    content="Test function")
 
@@ -43,6 +44,10 @@ class ArticleTestCase(TestCase):
         slug_list = Article.objects.all().values_list('slug', flat=True)
         unique_slug_list = list(set(slug_list))
         self.assertEqual(len(unique_slug_list), len(slug_list))
+
+    def test_article_search_manager(self):
+        qs = Article.objects.search(query='test')
+        self.assertEqual(qs.count(), self.number_of_articles)
 
     def tearDown(self) -> None:
         Article.objects.all().delete()

@@ -10,7 +10,7 @@ class ArticleQuerySet(models.QuerySet):
     def search(self, query):
         if query is None or query == '':
             return self.none()
-        lookups = Q(title__icontains=query) | Q(content__icontains=query) | Q()
+        lookups = Q(title__icontains=query) | Q(content__icontains=query)
         return self.filter(lookups)
 
 
