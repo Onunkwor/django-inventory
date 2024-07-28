@@ -109,9 +109,7 @@ if POSTGRES_READY:
             "PASSWORD": POSTGRES_PASSWORD,
             "HOST": POSTGRES_HOST,
             "PORT": POSTGRES_PORT,
-            'TEST': {
-                'NAME': 'test_postgres',  # The name of the test database
-            },
+
         }
     }
 
