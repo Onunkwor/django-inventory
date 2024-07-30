@@ -16,6 +16,9 @@ class Recipe(models.Model):
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return '/pantry/recipes'
+
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe,  on_delete=models.CASCADE)
@@ -30,6 +33,9 @@ class RecipeIngredient(models.Model):
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return self.recipe.get_absolute_url()
+
     def convert_to_system(self, system='mks'):
         if self.quantity_as_float is None:
             raise ValueError("Quantity as float is not set.")
@@ -38,6 +44,7 @@ class RecipeIngredient(models.Model):
         return measurement.to_base_units()
 
     def as_mks(self):
+        # meter, kilogram, seconds
         try:
             measurement = self.convert_to_system(system='mks')
             return measurement
@@ -45,6 +52,7 @@ class RecipeIngredient(models.Model):
             return str(e)
 
     def as_imperial(self):
+        # miles, pounds, seconds,
         try:
             measurement = self.convert_to_system(system='imperial')
             return measurement
