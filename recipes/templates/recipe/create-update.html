@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block content %} {% if not object %}
+<!-- prettier-ignore -->
+{% if message %}
+<p>{{message}}</p>
+{% endif%}
+<form
+  action="."
+  method="post"
+  style="display: flex; flex-direction: column; width: 400px"
+>
+  {% csrf_token %} {{ form.as_p }}
+
+  <input type="submit" value="Save" />
+</form>
+{% endif %} {% endblock %}

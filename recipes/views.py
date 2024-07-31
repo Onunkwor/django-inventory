@@ -18,7 +18,7 @@ def recipe_detail_view(request, id=None):
 def recipe_list_view(request):
     qs = Recipe.objects.filter(user=request.user)
     context = {
-        'object-list': qs
+        'object_list': qs
     }
     return render(request, 'recipe/list.html', context=context)
 
